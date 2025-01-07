@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import MyModal from '../../components/MyModal';
-import { $getRequest, $putRequest, $questionAlert, $successAlert } from '../../helpers/Helper';
+import { $deleteRequest, $getRequest, $questionAlert, $successAlert } from '../../helpers/Helper';
 import CategoriesModal from './CategoriesModal';
 
 const Categories = () => {
@@ -26,7 +26,7 @@ const Categories = () => {
 
   const remove = async (id) => {
     if(!(await $questionAlert())) return;
-    if(!(await $putRequest('categories.remove', {id: id}))) return;
+    if(!(await $deleteRequest('categories.remove', {id: id}))) return;
     await $successAlert();
     setData(data.filter(i => i.id != id));
   };

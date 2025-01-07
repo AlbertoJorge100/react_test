@@ -89,6 +89,7 @@ export const $closeAlert = () => {
 export const $getRequest = (url, ...data) => $request(1, url, data);
 export const $postRequest = (url, ...data) => $request(2, url, data);
 export const $putRequest = (url, ...data) => $request(3, url, data);
+export const $deleteRequest = (url, ...data) => $request(4, url, data);
 
 /**
  * 
@@ -145,10 +146,11 @@ const $request = (method, url, data = []) => {
     });
 }
 
-export const $validateForm = (formId, evPreventDefault = true, event) => {
-    if(evPreventDefault) event.preventDefault();
+export const $validateForm = (formId, evPreventDefault = true) => {
+    //if(evPreventDefault) event.preventDefault();
     const form = $typeOf(formId);
     form.classList.add('was-validated');    
-    if(!form.checkValidity()) return false;
-    return true;
+    if(form.checkValidity()) return true;
+    $errorMessage('Por favor revise los campos');
+    return false;
 };

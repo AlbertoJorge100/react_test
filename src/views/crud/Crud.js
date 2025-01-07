@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import CrudModal from './CrudModal';
 import MyModal from '../../components/MyModal';
-import { $getRequest, $putRequest, $questionAlert, $successAlert } from '../../helpers/Helper';
+import { $deleteRequest, $getRequest, $questionAlert, $successAlert } from '../../helpers/Helper';
 
 const Crud = () => {
   const [showModal, setShowModal] = useState(false);
@@ -28,7 +28,7 @@ const Crud = () => {
 
   const remove = async (id) => {
     if(!(await $questionAlert())) return;
-    if(!(await $putRequest('crud.remove', {id: id}))) return;
+    if(!(await $deleteRequest('crud.remove', {id: id}))) return;
     await $successAlert();
     setData(data.filter(i => i.id != id));
   };
